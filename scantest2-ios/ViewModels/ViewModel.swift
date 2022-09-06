@@ -12,6 +12,8 @@ class ViewModel: ObservableObject {
     @Published var showPicker = true
     @Published var source: Picker.Source = .library
     @Published var imagePicker = UIImagePickerController()
+    @Published var isCompleteImageUpload = false
+    @Published var imageUrl: String = ""
     
     func showPhotoPicker() {
         if source == .camera {

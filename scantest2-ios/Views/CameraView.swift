@@ -12,6 +12,7 @@ struct CameraView: View {
     var showPicker = false
     
     var body: some View {
+        let _ = print("vm.isCompleteImageUpload: \(vm.isCompleteImageUpload)")
         VStack {
             Text("카드이미지를 사이즈에 맞춰주세요")
                 .padding(20)
@@ -21,7 +22,7 @@ struct CameraView: View {
                     .frame(width: 250, height: 350)
                     .padding(15)
 
-                ImagePicker(sourceType: .camera, selectedImage: $vm.image, imagePicker: $vm.imagePicker).frame(width: 250, height: 350)
+                ImagePicker(sourceType: .camera, isCompleteImageUpload: $vm.isCompleteImageUpload, selectedImage: $vm.image, imagePicker: $vm.imagePicker, imageUrl: $vm.imageUrl).frame(width: 250, height: 350)
             }
             Button(action: {
                 vm.imagePicker.takePicture()
@@ -29,12 +30,9 @@ struct CameraView: View {
                 Text("카드스캔")
             }
              Spacer()
+            NavigationLink(destination: ResultView(), isActive: $vm.isCompleteImageUpload) {
+                
+            }.hidden()
         }
-    }
-}
-
-struct CameraView_Previews: PreviewProvider {
-    static var previews: some View {
-        CameraView()
     }
 }
